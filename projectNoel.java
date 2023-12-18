@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-
 public class projectNoel {
 
-    static double[][] list ={
+    double[][] list ={
             {45.171112,5.695952},
             {45.183152,5.699386},
             {45.174115,5.711106},
@@ -30,22 +29,69 @@ public class projectNoel {
     };
 
 //    double[] positionsData;
-    ArrayList positionsData;
+    double [][] distancesData;
     public static void main(String[] args) {
 
         System.out.println("hello");
         System.out.println(list[3][0]);
-
+        distancesDataArrayCreate(list, distancesData);
 
 
     }
 
-//    public ArrayList positionsArrayCreation(double longitude, double latitude) {
-//
-//        positionsData.add(0, longitude);
-//        positionsData.add(1, latitude);
-//        return positionsData;
-//    }
+    public double  ne(double lat1, double lon1,
+                            double lat2, double lon2)
+    {
+        // distance between latitudes and longitudes
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
 
+        // convert to radians
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+
+        // apply formulae
+        double a = Math.pow(Math.sin(dLat / 2), 2) +
+                Math.pow(Math.sin(dLon / 2), 2) *
+                        Math.cos(lat1) *
+                        Math.cos(lat2);
+        double rad = 6371;
+        double c = 2 * Math.asin(Math.sqrt(a));
+        return rad * c;
+    }
+
+    public void distancesDataArrayCreate (double [][] list, double [][]distancesArrayList) {
+
+        for (int i=0; i<=list.length; i++ ) {
+            for (int j = 0; j <= list.length; j++) {
+                for (int k = 0; k <= 1; k++) {
+
+
+                    distancesArrayList[i][j] = haversine(list[i][0], list[1][i], list[j][0], list[1][j]);
+                    System.out.println(distancesArrayList[i][j]);
+
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+    // Driver Code
+
+//        double lat1 = 51.5007;
+//        double lon1 = 0.1246;
+//        double lat2 = 40.6892;
+//        double lon2 = 74.0445;
+//        System.out.println(haversine(lat1, lon1, lat2, lon2) + " K.M.");
 
 }
+
+
+
